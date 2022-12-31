@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <h1 style="text-align: center;"> Agrega una nueva playlist </h1>
+  </div>
+  <div class="container py-5">
+  <div class="row">
+      <div class="col">
+        {% if form.errors %}
+        <p style="color: red;"> Por favor, completa todos los campos, todos son necesarios </p>
+        {% endif %}
+          <form action="/newplaylist/" method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                  <label for="name" class="lead text-muted">Nombre:</label>
+                  <input type="text" class="form-control" id="name" name ="name">
+              </div>
+              <div class="mb-3">
+                <label for="image" class="lead text-muted">Image link:</label>
+                <input type="text" class="form-control" id="image" name="image"> 
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark btn-lg">Crear</button>
+            </form>
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}

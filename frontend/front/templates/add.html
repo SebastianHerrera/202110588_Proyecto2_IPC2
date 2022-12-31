@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<div class="container">
+    <h1 style="text-align: center;"> Inserta una nueva cancion </h1>
+  </div>
+  <div class="container">
+  <div class="row">
+      <div class="col">
+        {% if form.errors %}
+        <p style="color: red;"> Por favor, completa todos los campos, todos son necesarios </p>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+          <form action="/add/" method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="name" class="lead text-muted">Playlist:</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccione una playlist</option>
+                  <option value="1">Liked Songs</option>
+                  <option value="2">Just to Feel Better</option>
+                  <option value="3">This is Kendrick Lamar</option>
+                </select>
+            </div>
+              <div class="mb-3">
+                  <label for="name" class="lead text-muted">Nombre:</label>
+                  <input type="text" class="form-control" id="name" name ="name">
+              </div>
+                <div class="mb-3">
+                  <label for="artist" class="lead text-muted">Artista:</label>
+                  <input type="text" class="form-control" id="artist" name ="artist">
+                  </div>
+              <div class="mb-3">
+                <label for="album" class="lead text-muted">Álbum:</label>
+                <input type="text" class="form-control" id="album" name ="album">
+              </div>
+              <div class="mb-3">
+                <label for="image" class="lead text-muted">Imagen:</label>
+                <input type="text" class="form-control" id="image" name="image"> 
+              </div>
+              <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
+            </form>
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}
