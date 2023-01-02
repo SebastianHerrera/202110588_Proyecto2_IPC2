@@ -1,15 +1,19 @@
 from usuario import Usuario
 from cancion import Cancion
 from playlist import Playlist
+from empresas import Empresa
+from clientes import Cliente
 import json
 
 class Gestor:
     def __init__(self):
+        self.empresas=[]
         self.usuarios=[]
         self.canciones=[]
         self.playlist=[]
-        self.usuarios.append(Usuario('Kirby','Superstar','kirby123','kirby'))
-        self.usuarios.append(Usuario('Santa','Claus','santita1','papanoel'))
+        self.clientes=[]
+        self.usuarios.append(Usuario('Sebastián','Herrera','hola123','Sebastiancho'))
+
 
     def obtener_usuarios(self):
         return json.dumps([ob.__dict__ for ob in self.usuarios])
@@ -20,14 +24,32 @@ class Gestor:
                 return x
         return None
 
-    def agregar_playlist(self,nombre,imagen):
-        nuevo=Playlist(nombre,imagen)
+    def agregar_cliente(self,nit,nombre,usuario,clave,direccion,correo,empresa,playlists):
+        nuevo=Cliente(nit,nombre,usuario,clave,direccion,correo,empresa,playlists)
+        self.clientes.append(nuevo)
+        return True
+    
+    def eliminar_cliente(self,nit,nombre,usuario,clave,direccion,correo,empresa,playlists):
+        nuevo=Cliente(nit,nombre,usuario,clave,direccion,correo,empresa,playlists)
+        for x in self.clientes:
+            if x.nit == nuevo.nit:
+                print(x.nit + x.nombre)
+                self.clientes.remove(x)
+        return True
+
+    def agregar_playlist(self,id,nit,vinyl,compacto,categoria,canciones):
+        nuevo=Playlist(id,nit,vinyl,compacto,categoria,canciones)
         self.playlist.append(nuevo)
         return True
 
     def agregar_cancion(self,nombre,artista,imagen,album):
         nuevo=Cancion(nombre,artista,imagen,album)
         self.canciones.append(nuevo)
+        return True
+
+    def agregar_empresa(self,id,nombre):
+        nuevo=Empresa(id,nombre)
+        self.empresas.append(nuevo)
         return True
 
     def obtener_canciones(self):
@@ -42,13 +64,43 @@ class Gestor:
             json.append(cancion)
         return json
 
+    def obtener_clientes(self):
+        json=[]
+        for i in self.clientes:
+            cliente={
+                'nit':i.nit,
+                'nombre':i.nombre,
+                'usuario':i.usuario,
+                'clave':i.clave,
+                'direccion':i.direccion,
+                'correo':i.correo,
+                'empresa':i.empresa,
+                'playlists':i.playlists
+            }
+            json.append(cliente)
+        return json
+
 
     def obtener_playlist(self):
         json=[]
         for i in self.playlist:
-            play={
-                'name':i.name,
-                'image':i.image
+            playlis={
+                'id':i.id,
+                'nit':i.nit,
+                'vinyl':i.vinyl,
+                'compacto':i.compacto,
+                'categoria':i.categoria,
+                'canciones':i.canciones
             }
-            json.append(play)
+            json.append(playlis)
+        return json
+
+    def obtener_empresas(self):
+        json=[]
+        for i in self.empresas:
+            empresa={
+                'id':i.id,
+                'nombre':i.nombre
+            }
+            json.append(empresa)
         return json

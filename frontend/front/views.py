@@ -51,6 +51,18 @@ def playlists(request):
         print('Error en la API')
     return render(request,'playlists.html',contexto)
 
+def empresas(request):
+    contexto={
+        'empresas':[]
+    }
+    try:
+        response=requests.get(servidor+'empresas') #http://127.0.0.1:5000/canciones
+        empresas=response.json()
+        contexto['empresas']=empresas
+    except:
+        print('Error en la API')
+    return render(request,'empresas.html',contexto)
+
 def newplaylist(request):
     if request.method=='POST':
         form=AddPlaylist(request.POST)

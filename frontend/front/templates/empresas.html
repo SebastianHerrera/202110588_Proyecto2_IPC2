@@ -2,22 +2,21 @@
 {% block content %}
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Bienvenido a MyMusicYourMusic</h1>
-        <p class="lead text-muted">¿Listo para crear tu Vinilo con tu playlist favorita?</p>
+        <h1 class="jumbotron-heading">MyMusicYourMusic</h1>
+        <p class="lead text-muted">Esta es nuestra lista de empresas.</p>
     </div>
 </section>
 
 <div class="album py-5 bg-light">
     <div class="container">
       <div class="row">
-        {% for playlist in playlists%}
+        {% for empresa in empresas%}
         <div class="col-md-4">
           <div class="card mb-4 box-shadow" style="width: 23rem;">
-            <img class="card-img-top" style="width: 23rem; height: 23rem; " src="https://mail.google.com/mail/u/0?ui=2&ik=90bb74d0f0&attid=0.1&permmsgid=msg-a:r3018766981614512330&th=18570dc952ee94cd&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ_o6xhPRhIqojqbSHc_MPDQgDZTuJTOETKrOuO0SqfrXu0my_rkJyUaNnF-SubpkkOLq4vonlZMojQxdsgtn7djTyaeUNGAVkNzqiERBr6VmTCSaaIMG3unJVM&disp=emb&realattid=ii_lcec5qjo0" alt="Playlist">
+            <img class="card-img-top" style="width: 23rem; height: 23rem; " src="https://mail.google.com/mail/u/0?ui=2&ik=90bb74d0f0&attid=0.1&permmsgid=msg-a:r-2249545766177607713&th=185711c92fe1c0c6&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ9XX4n1bF20aIBe3wTV-bRBx9dTA_cQV9om0IiUq2Sicx_E35n71CCa9VeWTQ0okLjbEFcgTUpxf4YLN72vud44seSdcM6m05fnEafYWkP5GlFhb2QQH6mtWZQ&disp=emb&realattid=ii_lceenjps0" alt="Playlist">
             <div class="card-body">
-                <h4 class="card-title">Playlist {{playlist.id}}</h4>
-                <h5 class="card-subtitle mb-2 text-muted">NIT: {{playlist.nit}}</h5>
-                <h5 class="card-subtitle mb-2 text-muted">Categoría: {{playlist.categoria}}</h5>
+                <h4 class="card-title">Empresa {{empresa.id}}</h4>
+                <h5 class="card-subtitle mb-2 text-muted">Nombre: {{empresa.nombre}}</h5>
               <div class="d-flex justify-content-between align-items-center">
               </div>
             </div>

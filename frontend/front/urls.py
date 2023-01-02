@@ -8,5 +8,6 @@ urlpatterns=[
     path('add/',views.add,name='add'),
     path('cargar/',views.cargaMasiva,name='carga'),
     path('newplaylist/',views.newplaylist,name='playlist'),
-    path('playlists/',views.playlists,name='playlists')
+    path('playlists/',views.playlists,name='playlists'),
+    path('empresas/',views.empresas,name='empresas')
 ]
