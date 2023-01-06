@@ -9,5 +9,8 @@ urlpatterns=[
     path('cargar/',views.cargaMasiva,name='carga'),
     path('newplaylist/',views.newplaylist,name='playlist'),
     path('playlists/',views.playlists,name='playlists'),
-    path('empresas/',views.empresas,name='empresas')
+    path('empresas/',views.empresas,name='empresas'),
+    path("newEmpresa/",views.newEmpresa,name="newEmpresa"),
+    path("newCliente/",views.newCliente,name="newCliente"), 
+    path('generarFactura/',views.generarFactura,name="generarFactura")
 ]

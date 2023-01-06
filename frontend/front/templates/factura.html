@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<div class="container">
+    <h1 class="jumbotron-heading text-center">Generar factura</h1>
+  </div>
+  <div class="container">
+  <div class="row">
+      <div class="col">
+        {% if form.errors %}
+        <p style="color: red;"> Por favor, completa todos los campos, todos son necesarios </p>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+          <form action="/generarFactura/" method="POST">
+              {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="lead text-muted">Nombre de Empresa:</label>
+              <input type="text" class="form-control" id="name" name ="name">
+          </div>
+              <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
+            </form>
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}

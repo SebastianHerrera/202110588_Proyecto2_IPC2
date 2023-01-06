@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import LoginForm,FileForm,AddForm,AddPlaylist
+from .forms import LoginForm,FileForm,AddForm,AddPlaylist,AddEmpresa,AddCliente,GenFactura
 
 import requests
 
@@ -19,7 +19,7 @@ def signin(request):
                 contexto={
                     'title':'Home'
                 }
-    return render(request,'home.html',contexto)
+    return render(request,'playlists.html',contexto)
 
 def login(request):
     contexto={
@@ -74,6 +74,39 @@ def newplaylist(request):
         return render(request,'playlist.html',{'form':form})
     return render(request,'playlist.html')
 
+def generarFactura(request):
+    if request.method=='POST':
+        form=GenFactura(request.POST)
+        if form.is_valid():
+            json_data=form.cleaned_data
+            response=requests.post(servidor+'factura',json=json_data)
+            if response.ok:
+                return render(request,'factura.html',{'form':form})
+        return render(request,'factura.html',{'form':form})
+    return render(request,'factura.html')
+
+def newEmpresa(request):
+    if request.method=='POST':
+        form=AddEmpresa(request.POST)
+        if form.is_valid():
+            json_data=form.cleaned_data
+            response=requests.post(servidor+'agregarEmpresa',json=json_data)
+            if response.ok:
+                return render(request,'newEmpresa.html',{'form':form})
+        return render(request,'newEmpresa.html',{'form':form})
+    return render(request,'newEmpresa.html')
+
+def newCliente(request):
+    if request.method=='POST':
+        form=AddCliente(request.POST)
+        if form.is_valid():
+            json_data=form.cleaned_data
+            response=requests.post(servidor+'agregarCliente',json=json_data)
+            if response.ok:
+                return render(request,'newEmpresa.html',{'form':form})
+        return render(request,'newEmpresa.html',{'form':form})
+    return render(request,'newEmpresa.html')
+
 def add(request):
     if request.method=='POST':
         form=AddForm(request.POST)
@@ -81,9 +114,9 @@ def add(request):
             json_data=form.cleaned_data
             response=requests.post(servidor+'agregarCancion',json=json_data)
             if response.ok:
-                return render(request,'add.html',{'form':form})
-        return render(request,'add.html',{'form':form})
-    return render(request,'add.html')
+                return render(request,'playlist.html',{'form':form})
+        return render(request,'playlist.html',{'form':form})
+    return render(request,'playlist.html')
 
 def cargaMasiva(request):
     ctx={

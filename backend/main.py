@@ -33,14 +33,32 @@ def agregarEmpresa():
 @app.route('/agregarPlaylist',methods=['POST'])
 def agregarPlaylist():
     json=request.get_json()
-    gestor.agregar_playlist(json['id'],json['nit'],json['vinyl'],json['compacto'],json['categoria'],json['canciones'])
-    return jsonify({'ok':True,'message':'Playlist añadida con exito'}),200
+    try:
+        gestor.agregar_playlist(json['id'],json['nit'],json['vinyl'],json['compacto'],json['categoria'],json['canciones'])
+        return jsonify({'ok':True,'message':'Playlist añadida con exito'}),200
+    except:
+        gestor.agregar_playlist_web(json['id'],json['nit'],json['vinyl'],json['compacto'],json['categoria'])
+        return jsonify({'ok':True,'message':'Playlist añadida con exito'}),200
 
 @app.route('/agregarCliente',methods=['POST'])
 def agregarCliente():
     json=request.get_json()
-    gestor.agregar_cliente(json['nit'],json['nombre'],json['usuario'],json['clave'],json['direccion'],json['correo'],json['empresa'],json['playlists'])
-    return jsonify({'ok':True,'message':'Cliente agregado con exito'}),200
+    try:
+        gestor.agregar_cliente(json['nit'],json['nombre'],json['usuario'],json['clave'],json['direccion'],json['correo'],json['empresa'],json['playlists'])
+        return jsonify({'ok':True,'message':'Cliente agregado con exito'}),200
+    except:
+        try:
+            gestor.agregar_cliente_web3(json['nit'],json['nombre'],json['usuario'],json['clave'],json['direccion'],json['correo'],json['empresa'],json['playlist3'],json['playlist2'],json['playlist1'])
+            return jsonify({'ok':True,'message':'Cliente web3 agregado con exito'}),200
+        except:
+            try:
+                gestor.agregar_cliente_web2(json['nit'],json['nombre'],json['usuario'],json['clave'],json['direccion'],json['correo'],json['empresa'],json['playlist2'],json['playlist1'])
+                return jsonify({'ok':True,'message':'Cliente web2 agregado con exito'}),200
+            except:
+                gestor.agregar_cliente_web1(json['nit'],json['nombre'],json['usuario'],json['clave'],json['direccion'],json['correo'],json['empresa'],json['playlist1'])
+                return jsonify({'ok':True,'message':'Cliente web1 agregado con exito'}),200
+
+    
 
 @app.route('/eliminarCliente',methods=['DELETE'])
 def eliminarCliente():
@@ -51,8 +69,14 @@ def eliminarCliente():
 @app.route('/agregarCancion',methods=['POST'])
 def agregarCancion():
     json=request.get_json()
-    gestor.agregar_cancion(json['name'],json['artist'],json['image'],json['album'])
+    gestor.agregar_cancion(json['playlistId'],json['id'],json['name'],json['año'],json['artist'],json['genero'])
     return jsonify({'ok':True,'message':'Cancion añadida con exito'}),200
+
+@app.route('/eliminarCancion',methods=['DELETE'])
+def eliminarCancion():
+    json=request.get_json()
+    gestor.eliminar_cancion(json['id'],json['name'],json['artist'],json['año'],json['genero'])
+    return jsonify({'ok':True,'message':'Cliente eliminado con exito'}),200
 
 @app.route('/agregarCanciones',methods=['POST'])
 def agregarCanciones():
@@ -62,6 +86,11 @@ def agregarCanciones():
         gestor.agregar_cancion(elemento.attrib['name'],elemento.attrib['artist'],elemento.attrib['image'],elemento.text)
     return jsonify({'ok':True,'message':'Canciones cargadas con exito'}),200
 
+@app.route('/factura',methods=['POST'])
+def gen_factura():
+    json=request.get_json()
+    gestor.generar_factura(json["name"])
+    return jsonify(gestor.generar_factura(json["name"])),200
 
 @app.route('/canciones',methods=['GET'])
 def get_canciones():
@@ -82,7 +111,6 @@ def get_clientes():
 def get_empresas():
     c=gestor.obtener_empresas()
     return jsonify(c),200
-
 
 if __name__ =="__main__":
     app.run(debug=True)

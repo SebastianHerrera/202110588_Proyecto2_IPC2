@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <h1 class="jumbotron-heading text-center"> Agrega una nueva empresa </h1>
+  </div>
+  <div class="container py-5">
+  <div class="row">
+      <div class="col">
+        {% if form.errors %}
+        <p style="color: red;"> Por favor completa todos los campos, todos son necesarios </p>
+        {% endif %}
+          <form action="/newEmpresa/" method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="id" class="lead text-muted">Id:</label>
+                <input type="number" class="form-control" id="id" name="id"> 
+              </div>
+              <div class="mb-3">
+                <label for="nombre" class="lead text-muted">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre"> 
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
+            </form>
+            
+          </div>
+      </div>
+  </div>
+  <div class="container py-4">
+    <h1 class="jumbotron-heading text-center"> Agrega una nuevo cliente</h1>
+  </div>
+  <div class="container py-5">
+  <div class="row">
+      <div class="col">
+        {% if form.errors %}
+        <p style="color: red;"> Por favor completa todos los campos, todos son necesarios </p>
+        {% endif %}
+          <form action="/newCliente/" method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="nit" class="lead text-muted">NIT:</label>
+                <input type="number" class="form-control" id="nit" name="nit"> 
+              </div>
+              <div class="mb-3">
+                <label for="nombre" class="lead text-muted">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre"> 
+              </div>
+              <div class="mb-3">
+                <label for="usuario" class="lead text-muted">Usuario:</label>
+                <input type="text" class="form-control" id="usuario" name="usuario"> 
+              </div>
+              <div class="mb-3">
+                <label for="clave" class="lead text-muted">Clave:</label>
+                <input type="password" class="form-control" id="clave" name="clave"> 
+              </div>
+              <div class="mb-3">
+                <label for="direccion" class="lead text-muted">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion"> 
+              </div>
+              <div class="mb-3">
+                <label for="correo" class="lead text-muted">Email:</label>
+                <input type="email" class="form-control" id="correo" name="correo"> 
+              </div>
+              <div class="mb-3">
+                <label for="empresa" class="lead text-muted">Id De Empresa:</label>
+                <input type="text" class="form-control" id="empresa" name="empresa"> 
+              </div>
+              <div class="mb-3">
+                <label for="playlist1" class="lead text-muted">Id Playlist 1:</label>
+                <input type="text" class="form-control" id="playlist1" name="playlist1"> 
+              </div>
+              <div class="mb-3">
+                <label for="playlist2" class="lead text-muted">Id De Playlist 2:</label>
+                <input type="text" class="form-control" id="playlist2" name="playlist2"> 
+              </div>
+              <div class="mb-3">
+                <label for="playlist3" class="lead text-muted">Id De Playlist 3:</label>
+                <input type="text" class="form-control" id="playlist3" name="playlist3"> 
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
+            </form>
+            
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}

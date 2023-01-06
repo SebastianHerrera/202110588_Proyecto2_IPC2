@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container py-4">
-    <h1 style="text-align: center;"> Agrega una nueva playlist </h1>
+    <h1 class="jumbotron-heading text-center"> Crea una nueva playlist </h1>
   </div>
   <div class="container py-5">
   <div class="row">
@@ -12,15 +12,71 @@
           <form action="/newplaylist/" method="POST">
               {% csrf_token %}
               <div class="mb-3">
+                <label for="id" class="lead text-muted">Id:</label>
+                <input type="number" class="form-control" id="id" name="id"> 
+              </div>
+              <div class="mb-3">
+                <label for="nit" class="lead text-muted">NIT:</label>
+                <input type="number" class="form-control" id="nit" name="nit"> 
+              </div>
+              <div class="mb-3">
+                <label for="vinyl" class="lead text-muted">Vinyl:</label>
+                <input type="text" class="form-control" id="vinyl" name="vinyl"> 
+              </div>
+              <div class="mb-3">
+                  <label for="compacto" class="lead text-muted">Compacto:</label>
+                  <input type="text" class="form-control" id="compacto" name ="compacto">
+              </div>
+              <div class="mb-3">
+                <label for="categoria" class="lead text-muted">Categoría:</label>
+                <input type="text" class="form-control" id="categoria" name="categoria"> 
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark btn-lg">Crear</button>
+            </form>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+    <h1 class="jumbotron-heading text-center"> Agrega una nueva cancion </h1>
+  </div>
+  <div class="container">
+  <div class="row">
+      <div class="col">
+        {% if form.errors %}
+        <p style="color: red;"> Por favor, completa todos los campos, todos son necesarios </p>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+          <form action="/add/" method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="playlistId" class="lead text-muted">Playlist Id:</label>
+                <input type="numer" class="form-control" id="playlistId" name ="playlistId">
+            </div>
+            <div class="mb-3">
+              <label for="id" class="lead text-muted">Id:</label>
+              <input type="number" class="form-control" id="id" name ="id">
+          </div>
+              <div class="mb-3">
                   <label for="name" class="lead text-muted">Nombre:</label>
                   <input type="text" class="form-control" id="name" name ="name">
               </div>
               <div class="mb-3">
-                <label for="image" class="lead text-muted">Image link:</label>
-                <input type="text" class="form-control" id="image" name="image"> 
+                <label for="año" class="lead text-muted">Año:</label>
+                <input type="number" class="form-control" id="año" name="año"> 
               </div>
-              <br>
-              <button type="submit" class="btn btn-dark btn-lg">Crear</button>
+                <div class="mb-3">
+                  <label for="artist" class="lead text-muted">Artista:</label>
+                  <input type="text" class="form-control" id="artist" name ="artist">
+                  </div>
+              <div class="mb-3">
+                <label for="genero" class="lead text-muted">Género:</label>
+                <input type="text" class="form-control" id="genero" name ="genero">
+              </div>
+              <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
             </form>
           </div>
       </div>
